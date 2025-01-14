@@ -20,11 +20,13 @@
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
 }
 
 #container {
     display: grid;
     grid-template-columns: 1fr 4fr;
+    position: relative;
 }
 
 /* Sidebar Styling */
@@ -67,6 +69,7 @@ body {
 
 hr {
     margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 #container-task-category {
@@ -103,6 +106,78 @@ hr {
     transform: scale(1.1);
 }
 
+
+/* Dialog Boxes */
+.headline-form {
+    background-color: var(--lightTeal);
+    color: var(--white);
+    padding: 10px 10px;
+    margin-bottom: 20px;
+}
+
+dialog {
+    background-color: var(--lightGray);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    border: var(--lightTeal) 1px solid;
+    width: 40%;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px var(--mutedNavy);
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 5px 20px;
+    gap: 20px;
+}
+
+.container-input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.container-form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    color: var(--darkGrey);
+}
+
+input, select, textarea {
+    font-size: 1em;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.container-form-buttons button {
+    font-size: 1em;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: none;
+    color: var(--white);
+}
+
+.form-add-button {
+    background-color: var(--lightTeal);
+}
+
+.cancel-form {
+    background-color: var(--softGray);
+}
+
+.container-form-buttons button:hover {
+    cursor: pointer;
+}
 
 /* Main Area */
 #content {

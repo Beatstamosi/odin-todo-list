@@ -60,22 +60,28 @@
         </div>
 
         <!-- Form Add Task -->
-        <dialog open>
+        <dialog id="dialog-add-task">
             <div class="headline-form">
                 <h2>Add Task</h2>
             </div>
             <form method="dialog">
                 <div class="container-input-form">
                     <label for="name-task">Name: </label>
-                    <input type="text" id="name-task" placeholder="Name">
+                    <input type="text" id="name-task" autofocus>
                 </div>
                 <div class="container-input-form">
                     <label for="description-task">Description: </label>
-                    <input type="textarea" id="description-task" placeholder="Description" rows="5" cols="20">
+                    <textarea name="description-task" id="description-task" rows="5" cols="100"></textarea>
                 </div>
                 <div class="container-input-form">
                     <label for="due-date-task">Due Date: </label>
                     <input type="date" id="due-date-task">
+                </div>
+                <div class="container-input-form">
+                    <label for="assign-to-project">Assign to Project: </label>
+                    <select name="assign-to-project" id="assign-to-project">
+                        <option value="project-1">Project 1</option>
+                    </select>
                 </div>
                 <div class="container-input-form">
                     <label for="priority-task">Priority: </label>
@@ -87,7 +93,32 @@
                 </div>
                 <div class="container-form-buttons">
                     <button class="cancel-form">Cancel</button>
-                    <button id="add-task" type="submit">Add Task</button>
+                    <button class="form-add-button" id="add-task" type="submit">Add Task</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Form Add Project -->
+        <dialog id="dialog-add-project">
+            <div class="headline-form">
+                <h2>Add Project</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-project">Name: </label>
+                    <input type="text" id="name-project" autofocus>
+                </div>
+                <div class="container-input-form">
+                    <label for="description-project">Description: </label>
+                    <textarea name="description-project" id="description-project" rows="5" cols="100"></textarea>
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-project">Due Date: </label>
+                    <input type="date" id="due-date-project">
+                </div>
+                <div class="container-form-buttons">
+                    <button class="cancel-form">Cancel</button>
+                    <button class="form-add-button" id="add-project" type="submit">Add Project</button>
                 </div>
             </form>
         </dialog>
