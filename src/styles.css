@@ -84,6 +84,25 @@ hr {
     font-weight: bold;
 }
 
+.add-btn {
+    width: 25px;
+    margin-right: 15px;
+}
+
+.category-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-btn:hover {
+    filter: drop-shadow(0 0 10px rgba(22, 160, 133, 0.8)) 
+          drop-shadow(0 0 15px rgba(22, 160, 133, 0.6)) 
+          drop-shadow(0 0 20px rgba(22, 160, 133, 0.4));
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 
 /* Main Area */
 #content {
