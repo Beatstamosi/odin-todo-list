@@ -17,22 +17,22 @@
             <div id="tasks-sidebar">
                 <div class="category-headline">
                     <h2>Tasks</h2>
-                    <img class="add-btn" id="add-task" src="./img/add.svg" alt="">
+                    <img class="add-btn" id="add-new-task" src="./img/add.svg" alt="">
                 </div>
                 <hr>
-                <div id="container-task-category">
+                <div class="container-task-category">
                     <img src="./img/tasks_all.svg" class="icon-tasks" alt="">
                     <span>All</span>
                 </div>
-                <div id="container-task-category">
+                <div class="container-task-category">
                     <img src="./img/tasks_today.svg" class="icon-tasks" alt="">
                     <span>Today</span>
                 </div>
-                <div id="container-task-category">
+                <div class="container-task-category">
                     <img src="./img/tasks_upcoming.svg" class="icon-tasks" alt="">
                     <span>Upcoming</span>
                 </div>
-                <div id="container-task-category">
+                <div class="container-task-category">
                     <img src="./img/tasks_completed.svg" class="icon-tasks" alt="">
                     <span>Completed</span>
                 </div>
@@ -41,12 +41,12 @@
             <div id="projects-sidebar">
                 <div class="category-headline">
                     <h2>Projects</h2>
-                    <img class="add-btn" id="add-project" src="./img/add.svg" alt="">
+                    <img class="add-btn" id="add-new-project" src="./img/add.svg" alt="">
                 </div>
                 <hr>
-                <div id="container-task-category">
+                <div class="container-project-category">
                     <img src="./img/project-icon.svg" class="icon-tasks" alt="">
-                    <span>Project I</span>
+                    <span>General</span>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
             <form method="dialog">
                 <div class="container-input-form">
                     <label for="name-task">Name: </label>
-                    <input type="text" id="name-task" autofocus>
+                    <input type="text" id="name-task" autofocus required>
                 </div>
                 <div class="container-input-form">
                     <label for="description-task">Description: </label>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="container-input-form">
                     <label for="due-date-task">Due Date: </label>
-                    <input type="date" id="due-date-task">
+                    <input type="date" id="due-date-task" required>
                 </div>
                 <div class="container-input-form">
                     <label for="assign-to-project">Assign to Project: </label>
@@ -92,7 +92,7 @@
                     </select>
                 </div>
                 <div class="container-form-buttons">
-                    <button class="cancel-form">Cancel</button>
+                    <button class="cancel-form" id="cancel-task-form">Cancel</button>
                     <button class="form-add-button" id="add-task" type="submit">Add Task</button>
                 </div>
             </form>
@@ -106,7 +106,7 @@
             <form method="dialog">
                 <div class="container-input-form">
                     <label for="name-project">Name: </label>
-                    <input type="text" id="name-project" autofocus>
+                    <input type="text" id="name-project" autofocus required>
                 </div>
                 <div class="container-input-form">
                     <label for="description-project">Description: </label>
@@ -114,10 +114,10 @@
                 </div>
                 <div class="container-input-form">
                     <label for="due-date-project">Due Date: </label>
-                    <input type="date" id="due-date-project">
+                    <input type="date" id="due-date-project" required>
                 </div>
                 <div class="container-form-buttons">
-                    <button class="cancel-form">Cancel</button>
+                    <button class="cancel-form" id="cancel-project-form">Cancel</button>
                     <button class="form-add-button" id="add-project" type="submit">Add Project</button>
                 </div>
             </form>

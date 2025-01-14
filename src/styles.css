@@ -72,7 +72,7 @@ hr {
     margin-top: 5px;
 }
 
-#container-task-category {
+.container-task-category, .container-project-category {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -80,7 +80,7 @@ hr {
     margin-bottom: 5px;
 }
 
-#container-task-category:hover {
+.container-task-category:hover, .container-project-category:hover {
     background-color: var(--lightGray);
     cursor: pointer;
     color: var(--lightTeal);
@@ -157,6 +157,10 @@ input, select, textarea {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
+}
+
+input[type="date"]:invalid {
+    border: var(--red) 1px solid;
 }
 
 .container-form-buttons button {
