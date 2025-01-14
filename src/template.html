@@ -7,6 +7,7 @@
 </head>
 <body>
     <div id="container">
+        <!-- SideBar -->
         <div id="sidebar">
             <div id="user">
                 <img src="./img/profile-user.svg" alt="">
@@ -16,7 +17,7 @@
             <div id="tasks-sidebar">
                 <div class="category-headline">
                     <h2>Tasks</h2>
-                    <img class="add-btn" src="./img/add.svg" alt="">
+                    <img class="add-btn" id="add-task" src="./img/add.svg" alt="">
                 </div>
                 <hr>
                 <div id="container-task-category">
@@ -40,7 +41,7 @@
             <div id="projects-sidebar">
                 <div class="category-headline">
                     <h2>Projects</h2>
-                    <img class="add-btn" src="./img/add.svg" alt="">
+                    <img class="add-btn" id="add-project" src="./img/add.svg" alt="">
                 </div>
                 <hr>
                 <div id="container-task-category">
@@ -50,9 +51,46 @@
             </div>
         </div>
     
+        <!-- Main Area -->
         <div id="content">
-    
+            <h2>All Tasks</h2>
+            <div id="container-content-overview">
+                <p>tasks_completed</p>
+            </div>
         </div>
+
+        <!-- Form Add Task -->
+        <dialog open>
+            <div class="headline-form">
+                <h2>Add Task</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-task">Name: </label>
+                    <input type="text" id="name-task" placeholder="Name">
+                </div>
+                <div class="container-input-form">
+                    <label for="description-task">Description: </label>
+                    <input type="textarea" id="description-task" placeholder="Description" rows="5" cols="20">
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-task">Due Date: </label>
+                    <input type="date" id="due-date-task">
+                </div>
+                <div class="container-input-form">
+                    <label for="priority-task">Priority: </label>
+                    <select name="priority-task" id="priority-task">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="container-form-buttons">
+                    <button class="cancel-form">Cancel</button>
+                    <button id="add-task" type="submit">Add Task</button>
+                </div>
+            </form>
+        </dialog>
     </div>
 </body>
 </html>

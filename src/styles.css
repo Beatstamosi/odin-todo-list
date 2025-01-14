@@ -107,4 +107,9 @@ hr {
 /* Main Area */
 #content {
     background-color: var(--lightGray);
+    padding: 30px;
+}
+
+#container-content-overview {
+    padding: 20px;
 }
