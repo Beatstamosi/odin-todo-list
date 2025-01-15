@@ -3,5 +3,8 @@ export default function createProject() {
     let description = document.querySelector("#description-project").value;
     let dueDate = document.querySelector("#due-date-project").value;
 
+    // function to add tasks --> call createTasks and add to array
+    // function to delete tasks
+
     return { name, description, dueDate, tasks: [] }
 }

@@ -1,4 +1,4 @@
-import createProject from "./createProject";
+import { toDoList } from "./globalToDoList";
 
 export default function setupButtonListeners() {
     // pop up form to add task
@@ -34,6 +34,10 @@ export default function setupButtonListeners() {
 
     // TODO: Add Project Button functionality
     const submitProjectBtn = document.querySelector("#add-project");
+
+    submitProjectBtn.addEventListener("click", () => {
+        toDoList.addProject();
+    });
 
     
 }
