@@ -13,7 +13,7 @@ import showProjectsSidebar from "./projectList";
         showProjectsSidebar();
     };
 
-    
+
     // TODO Check if function takes other parameter than projectName
     const deleteProject = function(projectName) {
         let index = allProjects.indexOf(projectName);
@@ -21,11 +21,17 @@ import showProjectsSidebar from "./projectList";
         saveToLocalStorage();
     };
 
-    const addTaskToProject = function(nameTask, descriptionTask, dueDateTask, index) {
-        let newTask = new Task(nameTask, descriptionTask, dueDateTask);
+    const addTaskToProject = function(nameTask, descriptionTask, dueDateTask, index, priority) {
+        let newTask = new Task(nameTask, descriptionTask, dueDateTask, priority);
         allProjects[index].tasks.push(newTask);
         saveToLocalStorage();
     };
+
+    const toggleTaskComplete = function(projectIndex, taskIndex) {
+        allProjects[projectIndex].tasks[taskIndex].completed = true;
+
+        // TO DO run screencontroller to update task list or remove task from view
+    }
 
 
     const deleteTask = function(projectIndex, taskIndex) {
@@ -65,6 +71,7 @@ import showProjectsSidebar from "./projectList";
         addProject,
         deleteProject,
         addTaskToProject,
+        toggleTaskComplete,
         deleteTask,
         saveToLocalStorage,
         retrieveFromLocalStorage
@@ -73,20 +80,10 @@ import showProjectsSidebar from "./projectList";
 
 
 
-
+// TODO
 // new .js to initialize globalList
     // retrieve localStorage
         // if empty: 
             // create General Project
             // add general project to globalList
             // add Example Task
-
-
-// screenController update projects sidebar
-    // retrieve globallist
-    // update project list in sidebar
-
-
-// render projects into options on task form
-
-

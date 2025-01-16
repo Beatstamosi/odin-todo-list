@@ -27,8 +27,10 @@ export default function setupButtonListeners() {
     submitTaskButton.addEventListener("click", () => {
         let select = document.querySelector("#assign-to-project");
         let projectIndex = select.options[select.selectedIndex].value;
+        let prioritySelect = document.querySelector("#priority-task");
+        let priority = prioritySelect.options[prioritySelect.selectedIndex].value;
 
-        toDoList.addTaskToProject(nameTask.value, descriptionTask.value, dueDateTask.value, projectIndex);
+        toDoList.addTaskToProject(nameTask.value, descriptionTask.value, dueDateTask.value, projectIndex, priority);
     });
 
 

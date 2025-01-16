@@ -20,19 +20,19 @@
                     <img class="add-btn" id="add-new-task" src="./img/add.svg" alt="">
                 </div>
                 <hr>
-                <div class="container-task-category">
+                <div class="container-task-category" id="tasks-all">
                     <img src="./img/tasks_all.svg" class="icon-tasks" alt="">
                     <span>All</span>
                 </div>
-                <div class="container-task-category">
+                <div class="container-task-category" id="tasks-today">
                     <img src="./img/tasks_today.svg" class="icon-tasks" alt="">
                     <span>Today</span>
                 </div>
-                <div class="container-task-category">
+                <div class="container-task-category" id="tasks-upcoming">
                     <img src="./img/tasks_upcoming.svg" class="icon-tasks" alt="">
                     <span>Upcoming</span>
                 </div>
-                <div class="container-task-category">
+                <div class="container-task-category" id="tasks-completed">
                     <img src="./img/tasks_completed.svg" class="icon-tasks" alt="">
                     <span>Completed</span>
                 </div>
@@ -50,10 +50,8 @@
     
         <!-- Main Area -->
         <div id="content">
-            <h2>All Tasks</h2>
-            <div id="container-content-overview">
-                <p>tasks_completed</p>
-            </div>
+            <h2 id="category-headline"></h2>
+            <div id="container-content-overview"></div>
         </div>
 
         <!-- Form Add Task -->
