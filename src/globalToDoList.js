@@ -11,13 +11,15 @@ import showProjectsSidebar from "./projectList";
         allProjects.push(new Project(name, description, dueDate));
         saveToLocalStorage();
         showProjectsSidebar();
+
+        // TO DO check if project name already exists
     };
 
 
     // TODO Check if function takes other parameter than projectName
     const deleteProject = function(projectName) {
-        let index = allProjects.indexOf(projectName);
-        allProjects.splice(index, 1);
+        let projectIndex = getProjectIndex(projectName);
+        allProjects.splice(projectIndex, 1);
         saveToLocalStorage();
     };
 
@@ -25,20 +27,57 @@ import showProjectsSidebar from "./projectList";
         let newTask = new Task(nameTask, descriptionTask, dueDateTask, priority);
         allProjects[index].tasks.push(newTask);
         saveToLocalStorage();
+
+        // TO DO check if task name already exists inside this project
     };
 
     const toggleTaskComplete = function(projectIndex, taskIndex) {
         allProjects[projectIndex].tasks[taskIndex].completed = true;
+        saveToLocalStorage();
 
         // TO DO run screencontroller to update task list or remove task from view
     }
 
 
-    const deleteTask = function(projectIndex, taskIndex) {
-        allProjects[projectIndex].tasks[taskIndex].splice(index, 1);
+    const deleteTask = function(projectName, taskName) {
+        let projectIndex = getProjectIndex(projectName);
+        let taskIndex = getTaskIndex(projectIndex, taskName);
+
+        allProjects[projectIndex].tasks.splice(taskIndex, 1);
         saveToLocalStorage();
     }
-    
+
+
+    const editTask = function(projectName, taskName, newName, newDescription, newDueDate, newPriority) {
+        let projectIndex = getProjectIndex(projectName);
+        let taskIndex = getTaskIndex(projectIndex, taskName);
+
+        // get task, update values
+        let task = allProjects[projectIndex].tasks[taskIndex];
+        task.name = newName;
+        task.description = newDescription;
+        task.dueDate = newDueDate;
+        task.priority = newPriority;
+
+        // saveToLocalStorage
+        saveToLocalStorage();
+    }
+
+
+    function getProjectIndex(projectName) {
+        const checkForName = (element) => element.name === projectName;
+        let projectIndex = allProjects.findIndex(checkForName);
+
+        return projectIndex;
+    }
+
+    function getTaskIndex(projectIndex, taskname) {
+        const checkForName = (element) => element.name === taskname;
+        let taskIndex = allProjects[projectIndex].tasks.findIndex(checkForName);
+
+        return taskIndex;
+    }
+
 
     function saveToLocalStorage()  {
         const projectsData = allProjects.map(project => ({
@@ -70,6 +109,7 @@ import showProjectsSidebar from "./projectList";
     return {
         addProject,
         deleteProject,
+        editTask,
         addTaskToProject,
         toggleTaskComplete,
         deleteTask,

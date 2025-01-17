@@ -115,6 +115,41 @@
                 </div>
             </form>
         </dialog>
+
+        <!-- Form Edit Task -->
+        <dialog id="dialog-edit-task">
+            <div class="headline-form">
+                <h2>Edit Task</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-edit-task">Name: </label>
+                    <input type="text" id="name-edit-task" autofocus required>
+                </div>
+                <div class="container-input-form">
+                    <label for="description-edit-task">Description: </label>
+                    <textarea name="description-edit-task" id="description-edit-task" rows="5" cols="100"></textarea>
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-edit-task">Due Date: </label>
+                    <input type="date" id="due-date-edit-task" required>
+                </div>
+                <div class="container-input-form">
+                    <label for="priority-edit-task">Priority: </label>
+                    <select name="priority-edit-task" id="priority-edit-task">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="container-form-buttons">
+                    <button class="delete-task-form" id="delete-task-form-btn">Delete Task</button>
+                    <button class="cancel-form" id="cancel-edit-task-form">Cancel</button>
+                    <button class="form-add-button" id="save-edit-task-btn" type="submit">Save Changes</button>
+                </div>
+            </form>
+        </dialog>
+
     </div>
 </body>
 </html>

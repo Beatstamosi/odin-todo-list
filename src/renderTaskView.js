@@ -1,5 +1,7 @@
 import { toDoList } from "./globalToDoList";
 
+let currentCategory;
+
 export default function renderTaskView(category) {
     renderTaskViewHeadline(category);
 
@@ -7,7 +9,8 @@ export default function renderTaskView(category) {
     // depending on category call function to get tasks
     if (category === "tasks-all") {
         tasks = getAllTasks();
-        renderAllTasks(tasks);
+        renderTasks(tasks);
+        currentCategory = category;
     } else if (category === "tasks-today") {
         
         
@@ -44,7 +47,7 @@ function getAllTasks() {
     return toDoList.retrieveFromLocalStorage();
 }
 
-function renderAllTasks(projectsList) {
+function renderTasks(projectsList) {
     const containerContent = document.querySelector("#container-content-overview");
     containerContent.innerHTML = "";
     
@@ -65,6 +68,7 @@ function renderAllTasks(projectsList) {
     
                 let containerTask = document.createElement("div");
                 containerTask.classList.add("task-component");
+                containerTask.id = `task-${index}`;
                 projectContainer.appendChild(containerTask);
     
                 let priorityTag = document.createElement("div");
@@ -75,9 +79,10 @@ function renderAllTasks(projectsList) {
                 inputCheckbox.type = "checkbox";
                 inputCheckbox.classList.add("task-complete");
                 inputCheckbox.id = `task-complete-${index}`;
-                inputCheckbox.dataset.taskIndex = index;
+                inputCheckbox.dataset.taskname = task.name;
                 inputCheckbox.dataset.projectname = project.name;
                 // TO DO add event listeners
+                // toggle and update toggleClassComplete of toDoList
     
                 let title = document.createElement("p");
                 title.classList.add("title-task-overview")
@@ -89,14 +94,26 @@ function renderAllTasks(projectsList) {
     
                 let editButton = document.createElement("button");
                 editButton.classList.add("edit-task-btn");
-                // TO DO add eventlisteners
+                editButton.dataset.taskname = task.name;
+                editButton.dataset.projectname = project.name;
+                editButton.addEventListener("click", function() {
+                    addEditTaskEvent(editButton, task, index);
+                })
     
                 let deleteButton = document.createElement("button");
                 deleteButton.classList.add("delete-task-btn");
-                deleteButton.dataset.taskIndex = index;
+                deleteButton.dataset.taskname = task.name;
                 deleteButton.dataset.projectname = project.name;
-                // TO DO add eventlisteners
+                deleteButton.addEventListener("click", () => {
+                    let projectName = editButton.dataset.projectname;
+                    let taskName = editButton.dataset.taskname;
+
+                    toDoList.deleteTask(projectName, taskName);
+
+                    deleteTaskFromScreen(index);
+                })
                 
+
                 let extendButton = document.createElement("button");
                 extendButton.classList.add("extend-task");
                 // TO DO add eventlistener + add to description div
@@ -114,9 +131,62 @@ function renderAllTasks(projectsList) {
                 // add index of task and project name as dataset
             })
         }
-        
-        // add margin-bottom via css to project-task container
     })
 }
 
-    
+function addEditTaskEvent(editButton, task, taskIndex) {
+    // add eventlistener
+    const editTaskForm = document.querySelector("#dialog-edit-task");
+    const inputName = document.querySelector("#name-edit-task");
+    const inputDescription = document.querySelector("#description-edit-task");
+    const inputDueDate = document.querySelector("#due-date-edit-task");
+    const inputSelect = document.querySelector("#priority-edit-task");
+    const cancelBtn = document.querySelector("#cancel-edit-task-form");
+    const saveChangesBtn = document.querySelector("#save-edit-task-btn");
+    const deleteTaskBtn = document.querySelector("#delete-task-form-btn");
+
+    editTaskForm.showModal();
+
+    inputName.value = task.name;
+    inputDescription.value = task.description;
+    inputDueDate.value = task.dueDate;
+    inputSelect.value = task.priority;
+
+    cancelBtn.addEventListener("click", () => {
+        editTaskForm.close();
+    })
+
+    saveChangesBtn.addEventListener("click", () => {
+        let projectName = editButton.dataset.projectname;
+        let taskName = editButton.dataset.taskname;
+
+        // send new values
+        let newName = inputName.value;
+        let newDescription = inputDescription.value;
+        let newDueDate = inputDueDate.value;
+        let newPriority = inputSelect.value;
+
+        toDoList.editTask(projectName, taskName, newName, newDescription, newDueDate, newPriority);
+
+        // TO DO update screen
+        renderTaskView(currentCategory);
+
+    });
+
+    // delete button
+    deleteTaskBtn.addEventListener("click", () => {
+        let projectName = editButton.dataset.projectname;
+        let taskName = editButton.dataset.taskname;
+
+        toDoList.deleteTask(projectName, taskName);
+
+        // TO DO update Screen
+        deleteTaskFromScreen(taskIndex);
+    });
+}
+
+
+function deleteTaskFromScreen(taskIndex) {
+    let taskContainer = document.querySelector(`#task-${taskIndex}`);
+    taskContainer.remove();
+}
