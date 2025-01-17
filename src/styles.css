@@ -13,7 +13,7 @@
     --darkGrey: #34495E;
     --black: #2D3436;
     --softBlue: #3498DB;
-    --yellow: #F39C12;
+    --yellow: #f7c41d;
     --green: #27AE60;
     --red: #E74C3C;
 }
@@ -21,7 +21,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: .05em;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 #container {
@@ -220,9 +220,6 @@ input[type="date"]:invalid {
 
 }
 
-.title-task-overview {
-    font-size: 1.1em;
-}
 
 .task-complete, .title-task-overview, .due-date-task-overview {
     height: 1em;
