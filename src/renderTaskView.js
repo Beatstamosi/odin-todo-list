@@ -23,7 +23,7 @@ export default function renderTaskView(category) {
 }
 
 function renderTaskViewHeadline(category) {
-    const categoryHeadline = document.querySelector("#category-headline");
+    const contentHeadline = document.querySelector("#content-headline");
 
     let headline;
 
@@ -37,7 +37,7 @@ function renderTaskViewHeadline(category) {
         headline = "Completed Tasks";
     }
 
-    categoryHeadline.textContent = headline;
+    contentHeadline.textContent = headline;
 }
 
 function getAllTasks() {
@@ -46,14 +46,13 @@ function getAllTasks() {
 
 function renderAllTasks(projectsList) {
     const containerContent = document.querySelector("#container-content-overview");
-
-    console.log(projectsList);
+    containerContent.innerHTML = "";
     
     projectsList.forEach(project => {
         // render headline for project
         if (project.tasks.length > 0) {
             let projectContainer = document.createElement("div");
-            // TO DO set class
+            projectContainer.classList.add("project-tasks-component");
             containerContent.appendChild(projectContainer);
 
             let projectHeader = document.createElement("h2");
@@ -71,7 +70,7 @@ function renderAllTasks(projectsList) {
                 let priorityTag = document.createElement("div");
                 priorityTag.classList.add("priority-tag");
                 priorityTag.classList.add(task.priority);
-    
+
                 let inputCheckbox = document.createElement("input");
                 inputCheckbox.type = "checkbox";
                 inputCheckbox.classList.add("task-complete");
@@ -81,37 +80,36 @@ function renderAllTasks(projectsList) {
                 // TO DO add event listeners
     
                 let title = document.createElement("p");
+                title.classList.add("title-task-overview")
                 title.textContent = task.name;
     
                 let dueDate = document.createElement("p");
+                dueDate.classList.add("due-date-task-overview");
                 dueDate.textContent = task.dueDate;
     
                 let editButton = document.createElement("button");
                 editButton.classList.add("edit-task-btn");
-                // TO DO style button with img background
                 // TO DO add eventlisteners
     
                 let deleteButton = document.createElement("button");
                 deleteButton.classList.add("delete-task-btn");
                 deleteButton.dataset.taskIndex = index;
                 deleteButton.dataset.projectname = project.name;
-                // TO DO style button with img background
                 // TO DO add eventlisteners
                 
                 let extendButton = document.createElement("button");
                 extendButton.classList.add("extend-task");
-                // TO DO style button with img background
-                // TO DO add eventlistener
+                // TO DO add eventlistener + add to description div
     
-                let containerDescription = document.createElement("div");
-                containerDescription.classList.add("expanded-task-content");
-                // TO DO add classes to show / hide element - toggle via labelExtend
+                // let containerDescription = document.createElement("div");
+                // containerDescription.classList.add("expanded-task-content");
+                // // TO DO add classes to show / hide element - toggle via labelExtend
     
-                let description = document.createElement("p");
-                description.textContent = task.description;
-                containerDescription.appendChild(description);
+                // // let description = document.createElement("p");
+                // // description.textContent = task.description;
+                // // containerDescription.appendChild(description);
     
-                containerTask.append(priorityTag, inputCheckbox, title, dueDate, editButton, deleteButton, extendButton, containerDescription);
+                containerTask.append(priorityTag, inputCheckbox, title, dueDate, editButton, deleteButton, extendButton);
     
                 // add index of task and project name as dataset
             })

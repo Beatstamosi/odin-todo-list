@@ -21,7 +21,7 @@ import showProjectsSidebar from "./projectList";
         saveToLocalStorage();
     };
 
-    const addTaskToProject = function(nameTask, descriptionTask, dueDateTask, index, priority) {
+    const addTaskToProject = function(nameTask, descriptionTask, dueDateTask, priority, index) {
         let newTask = new Task(nameTask, descriptionTask, dueDateTask, priority);
         allProjects[index].tasks.push(newTask);
         saveToLocalStorage();
@@ -59,7 +59,7 @@ import showProjectsSidebar from "./projectList";
                 const project = new Project(projectData.name, projectData.description, projectData.dueDate);
                 // Manually reassign the tasks, as they are just plain objects after serialization
                 project.tasks = projectData.tasks.map(taskData => {
-                    return new Task(taskData.name, taskData.description, taskData.dueDate);
+                    return new Task(taskData.name, taskData.description, taskData.dueDate, taskData.priority);
                 });
                 return project;
             });

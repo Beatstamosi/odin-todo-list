@@ -30,7 +30,7 @@ export default function setupButtonListeners() {
         let prioritySelect = document.querySelector("#priority-task");
         let priority = prioritySelect.options[prioritySelect.selectedIndex].value;
 
-        toDoList.addTaskToProject(nameTask.value, descriptionTask.value, dueDateTask.value, projectIndex, priority);
+        toDoList.addTaskToProject(nameTask.value, descriptionTask.value, dueDateTask.value, priority, projectIndex);
     });
 
 

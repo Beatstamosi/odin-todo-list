@@ -19,7 +19,8 @@
 }
 
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: .05em;
     font-size: 16px;
 }
 
@@ -98,6 +99,12 @@ hr {
     align-items: center;
 }
 
+#content-headline {
+    font-size: 3em;
+    margin-bottom: 50px;
+    color: var(--lightTeal);
+}
+
 .add-btn:hover {
     filter: drop-shadow(0 0 10px rgba(22, 160, 133, 0.8)) 
           drop-shadow(0 0 15px rgba(22, 160, 133, 0.6)) 
@@ -169,6 +176,7 @@ input[type="date"]:invalid {
     font-weight: bold;
     border: none;
     color: var(--white);
+    cursor: pointer;
 }
 
 .form-add-button {
@@ -179,10 +187,6 @@ input[type="date"]:invalid {
     background-color: var(--softGray);
 }
 
-.container-form-buttons button:hover {
-    cursor: pointer;
-}
-
 /* Main Area */
 #content {
     background-color: var(--lightGray);
@@ -191,4 +195,82 @@ input[type="date"]:invalid {
 
 #container-content-overview {
     padding: 20px;
+}
+
+.project-tasks-component {
+    margin-bottom: 50px;
+}
+
+.project-tasks-component h2 {
+    font-size: 1.2em;
+    border-bottom: 2px solid var(--softGray);
+    width: fit-content;
+    margin-bottom: 10px;
+    color: var(--mutedNavy);
+}
+
+.task-component {
+    border-bottom: 1px solid var(--softGray);
+    height: 45px;
+    display: grid;
+    grid-template-columns: 10px 1fr 6fr 1fr repeat(3, 0.3fr);
+    align-content: center;
+    color: var(--mutedNavy);
+    margin-bottom: 10px;
+
+}
+
+.title-task-overview {
+    font-size: 1.1em;
+}
+
+.task-complete, .title-task-overview, .due-date-task-overview {
+    height: 1em;
+    align-self: center;
+}
+
+.priority-tag {
+    width: 5px;
+    border-radius: 5px;
+    height: 2em;
+}
+
+.low {
+    background-color: var(--green);
+}
+
+.medium, .undefined {
+    background-color: var(--yellow);
+}
+
+.high {
+    background-color: var(--red);
+}
+
+.edit-task-btn {
+    background-image: url(./img/edit.svg);
+}
+
+.delete-task-btn {
+    background-image: url(./img/delete.svg);
+}
+
+.extend-task {
+    background-image: url(./img/dropdown-arrow.svg);
+}
+
+.edit-task-btn, .delete-task-btn, .extend-task {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    width: 25px;
+    height: auto;
+    cursor: pointer;
+}
+
+.due-date-task-overview {
+    font-size: 0.8em;
+    font-style: italic;
 }
