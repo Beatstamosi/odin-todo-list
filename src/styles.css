@@ -6,6 +6,7 @@
 
 :root {
     --lightGray: #F7F7F7;
+    --lightGrayTrans: #fafafa;
     --mutedNavy: #2C3E50;
     --lightTeal: #16A085;
     --white: #FFFFFF;
@@ -101,8 +102,8 @@ hr {
 
 #content-headline {
     font-size: 3em;
-    margin-bottom: 50px;
-    color: var(--lightTeal);
+    margin-bottom: 30px;
+    color: var(--mutedNavy);
 }
 
 .add-btn:hover {
@@ -198,26 +199,47 @@ input[type="date"]:invalid {
 }
 
 .project-tasks-component {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    padding: 20px;
 }
 
 .project-tasks-component h2 {
-    font-size: 1.2em;
-    border-bottom: 2px solid var(--softGray);
+    font-size: 1em;
     width: fit-content;
     margin-bottom: 10px;
-    color: var(--mutedNavy);
+    color: var(--lightGray);
+    background-color: var(--lightTeal);
+    padding: 10px;
 }
 
 .task-component {
-    border-bottom: 1px solid var(--softGray);
-    height: 45px;
+    height: auto;
     display: grid;
     grid-template-columns: 10px 1fr 6fr 1fr repeat(3, 0.3fr);
+    grid-template-rows: auto auto;
+    gap: 10px;
     align-content: center;
     color: var(--mutedNavy);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    background-color: var(--lightGrayTrans);
+    box-shadow: 1px 1px 1px var(--softGray);
 
+}
+
+.expanded-task-content {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: 10px 30px;
+    font-size: 0.9em;
+}
+
+input[type="checkbox"] {
+    accent-color: var(--lightTeal);
+}
+  
+
+.hide {
+    display: none;
 }
 
 .task-complete, .title-task-overview, .due-date-task-overview {

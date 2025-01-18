@@ -115,20 +115,22 @@ function renderTasks(projectsList) {
                     deleteTaskFromScreen(index);
                 })
                 
+    
+                let containerDescription = document.createElement("div");
+                containerDescription.classList.add("expanded-task-content", "hide");
+    
+                let description = document.createElement("p");
+                description.textContent = task.description;
+                containerDescription.appendChild(description);
 
                 let extendButton = document.createElement("button");
                 extendButton.classList.add("extend-task");
                 // TO DO add eventlistener + add to description div
+                extendButton.addEventListener("click", () => {
+                    containerDescription.classList.toggle("hide");
+                })
     
-                // let containerDescription = document.createElement("div");
-                // containerDescription.classList.add("expanded-task-content");
-                // // TO DO add classes to show / hide element - toggle via labelExtend
-    
-                // // let description = document.createElement("p");
-                // // description.textContent = task.description;
-                // // containerDescription.appendChild(description);
-    
-                containerTask.append(priorityTag, inputCheckbox, title, dueDate, editButton, deleteButton, extendButton);
+                containerTask.append(priorityTag, inputCheckbox, title, dueDate, editButton, deleteButton, extendButton, containerDescription);
     
                 // add index of task and project name as dataset
             })
