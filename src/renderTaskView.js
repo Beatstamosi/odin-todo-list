@@ -45,6 +45,8 @@ function renderTaskViewHeadline(category) {
 
 function getAllTasks() {
     return toDoList.retrieveFromLocalStorage();
+
+    // TO DO get allTasks that are not completed
 }
 
 function renderTasks(projectsList) {
@@ -63,8 +65,6 @@ function renderTasks(projectsList) {
             projectContainer.appendChild(projectHeader);
 
             project.tasks.forEach((task, index) => {
-                // render card for tasks - priority, checkbox, title, duedate - button edit, button drop down
-                // add div with extended content for description
     
                 let containerTask = document.createElement("div");
                 containerTask.classList.add("task-component");
@@ -81,8 +81,10 @@ function renderTasks(projectsList) {
                 inputCheckbox.id = `task-complete-${index}`;
                 inputCheckbox.dataset.taskname = task.name;
                 inputCheckbox.dataset.projectname = project.name;
-                // TO DO add event listeners
-                // toggle and update toggleClassComplete of toDoList
+                inputCheckbox.addEventListener("change", () => {
+                    let checked = inputCheckbox.checked;
+                    toDoList.toggleTaskComplete(checked, project.name, task.name);
+                });
     
                 let title = document.createElement("p");
                 title.classList.add("title-task-overview")
@@ -168,7 +170,6 @@ function addEditTaskEvent(editButton, task, taskIndex) {
 
         toDoList.editTask(projectName, taskName, newName, newDescription, newDueDate, newPriority);
 
-        // TO DO update screen
         renderTaskView(currentCategory);
 
     });
@@ -180,7 +181,6 @@ function addEditTaskEvent(editButton, task, taskIndex) {
 
         toDoList.deleteTask(projectName, taskName);
 
-        // TO DO update Screen
         deleteTaskFromScreen(taskIndex);
     });
 }

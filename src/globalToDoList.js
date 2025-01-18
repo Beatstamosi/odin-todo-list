@@ -28,11 +28,18 @@ import showProjectsSidebar from "./projectList";
         allProjects[index].tasks.push(newTask);
         saveToLocalStorage();
 
-        // TO DO check if task name already exists inside this project
+        // TO DO check if task name already exists inside this project; show error and dont save
     };
 
-    const toggleTaskComplete = function(projectIndex, taskIndex) {
-        allProjects[projectIndex].tasks[taskIndex].completed = true;
+    const toggleTaskComplete = function(checked, projectName, taskName) {
+        let projectIndex = getProjectIndex(projectName);
+        let taskIndex = getTaskIndex(projectIndex, taskName);
+        let task = allProjects[projectIndex].tasks[taskIndex];
+
+        task.completed = checked;
+
+        console.log(task.completed);
+        
         saveToLocalStorage();
 
         // TO DO run screencontroller to update task list or remove task from view
