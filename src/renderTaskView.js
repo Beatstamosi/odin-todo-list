@@ -112,7 +112,7 @@ function renderTasks(projectsList) {
 
                     toDoList.deleteTask(projectName, taskName);
 
-                    deleteTaskFromScreen(index);
+                    renderTaskView(currentCategory);
                 })
                 
     
@@ -125,14 +125,11 @@ function renderTasks(projectsList) {
 
                 let extendButton = document.createElement("button");
                 extendButton.classList.add("extend-task");
-                // TO DO add eventlistener + add to description div
                 extendButton.addEventListener("click", () => {
                     containerDescription.classList.toggle("hide");
                 })
     
                 containerTask.append(priorityTag, inputCheckbox, title, dueDate, editButton, deleteButton, extendButton, containerDescription);
-    
-                // add index of task and project name as dataset
             })
         }
     })
@@ -182,13 +179,7 @@ function addEditTaskEvent(editButton, task, taskIndex) {
         let taskName = editButton.dataset.taskname;
 
         toDoList.deleteTask(projectName, taskName);
-
-        deleteTaskFromScreen(taskIndex);
+        
+        renderTaskView(currentCategory);
     });
-}
-
-
-function deleteTaskFromScreen(taskIndex) {
-    let taskContainer = document.querySelector(`#task-${taskIndex}`);
-    taskContainer.remove();
 }
