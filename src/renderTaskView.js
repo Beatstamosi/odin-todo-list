@@ -13,8 +13,7 @@ export default function renderTaskView(category) {
     } else if (category === "tasks-today") {
         tasks = getTodayTasks();
     } else if (category === "tasks-upcoming") {
-        
-        
+        tasks = getUpcomingTasks();
     } else if (category === "tasks-completed") {
         tasks = getCompletedTasks();
     }
@@ -74,6 +73,26 @@ function getTodayTasks() {
     return projectList;
 }
 
+function getUpcomingTasks() {
+    let projectList = getAllTasks();
+
+    let dateToday = new Date();
+    dateToday.setDate(dateToday.getDate() + 7);
+    let day = ('0' + dateToday.getDate()).slice(-2);
+    let month = ('0' + dateToday.getMonth() + 1).slice(-2);
+    let year = dateToday.getFullYear();
+
+    let dateOneWeek = `${year}-${month}-${day}`;
+
+    projectList.forEach(project => {
+       project.tasks = project.tasks.filter(task => task.dueDate < dateOneWeek);
+    });
+
+    projectList = projectList.filter(project => project.tasks.length > 0);
+
+    return projectList;
+}
+
 
 function getCompletedTasks() {
     let projectList = toDoList.retrieveFromLocalStorage();
@@ -125,7 +144,10 @@ function renderTasks(projectsList) {
                 inputCheckbox.addEventListener("change", () => {
                     let checked = inputCheckbox.checked;
                     toDoList.toggleTaskComplete(checked, project.name, task.name);
-                    renderTaskView(currentCategory);
+
+                    setTimeout(() => {
+                        renderTaskView(currentCategory);
+                    }, 200);
                 });
     
                 let title = document.createElement("p");

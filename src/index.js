@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTaskView(todayTaskButton.id);
     })
 
+    const upcomingTaskButton = document.querySelector("#tasks-upcoming");
+   upcomingTaskButton.addEventListener("click", () => {
+        renderTaskView(upcomingTaskButton.id);
+    })
+
 });
 
 
