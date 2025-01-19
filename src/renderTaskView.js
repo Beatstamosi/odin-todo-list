@@ -9,19 +9,18 @@ export default function renderTaskView(category) {
     // depending on category call function to get tasks
     if (category === "tasks-all") {
         tasks = getAllTasks();
-        currentCategory = category;
-        renderTasks(tasks);
+        
     } else if (category === "tasks-today") {
-        
-        
+        tasks = getTodayTasks();
     } else if (category === "tasks-upcoming") {
         
         
     } else if (category === "tasks-completed") {
         tasks = getCompletedTasks();
-        currentCategory = category;
-        renderTasks(tasks);
     }
+
+    currentCategory = category;
+    renderTasks(tasks);
 
     // pass in tasks and call render function for tasks
 }
@@ -49,6 +48,25 @@ function getAllTasks() {
 
     projectList.forEach(project => {
        project.tasks = project.tasks.filter(task => !task.completed);
+    });
+
+    projectList = projectList.filter(project => project.tasks.length > 0);
+
+    return projectList;
+}
+
+function getTodayTasks() {
+    let projectList = getAllTasks();
+
+    let dateToday = new Date();
+    let day = ('0' + dateToday.getDate()).slice(-2);
+    let month = ('0' + dateToday.getMonth() + 1).slice(-2);
+    let year = dateToday.getFullYear();
+
+    let currentDate = `${year}-${month}-${day}`;
+
+    projectList.forEach(project => {
+       project.tasks = project.tasks.filter(task => task.dueDate === currentDate);
     });
 
     projectList = projectList.filter(project => project.tasks.length > 0);

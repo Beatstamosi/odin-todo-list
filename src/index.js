@@ -20,6 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTaskView(completedTaskButton.id);
     })
 
+    const todayTaskButton = document.querySelector("#tasks-today");
+    todayTaskButton.addEventListener("click", () => {
+        renderTaskView(todayTaskButton.id);
+    })
+
 });
 
 
