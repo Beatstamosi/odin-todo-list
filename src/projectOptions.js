@@ -5,7 +5,6 @@ export default function assignProjectOptionsToTaskForm() {
 
     // get todolist
     let list = toDoList.retrieveFromLocalStorage();
-    console.log(list);
 
     selectField.innerHTML = "";
 

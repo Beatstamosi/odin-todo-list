@@ -1,6 +1,8 @@
 import { Project } from "./createProject";
 import { Task } from "./createTask";
 import showProjectsSidebar from "./projectList";
+import renderTaskView from "./renderTaskView";
+import { currentCategory } from "./renderTaskView";
 
  export const toDoList = function() {
 
@@ -38,8 +40,6 @@ import showProjectsSidebar from "./projectList";
 
         task.completed = checked;
 
-        console.log(task.completed);
-        
         saveToLocalStorage();
 
         // TO DO run screencontroller to update task list or remove task from view
@@ -105,7 +105,7 @@ import showProjectsSidebar from "./projectList";
                 const project = new Project(projectData.name, projectData.description, projectData.dueDate);
                 // Manually reassign the tasks, as they are just plain objects after serialization
                 project.tasks = projectData.tasks.map(taskData => {
-                    return new Task(taskData.name, taskData.description, taskData.dueDate, taskData.priority);
+                    return new Task(taskData.name, taskData.description, taskData.dueDate, taskData.priority, taskData.completed);
                 });
                 return project;
             });

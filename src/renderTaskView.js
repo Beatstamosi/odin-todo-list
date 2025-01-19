@@ -9,8 +9,8 @@ export default function renderTaskView(category) {
     // depending on category call function to get tasks
     if (category === "tasks-all") {
         tasks = getAllTasks();
-        renderTasks(tasks);
         currentCategory = category;
+        renderTasks(tasks);
     } else if (category === "tasks-today") {
         
         
@@ -18,8 +18,9 @@ export default function renderTaskView(category) {
         
         
     } else if (category === "tasks-completed") {
-        
-        
+        tasks = getCompletedTasks();
+        currentCategory = category;
+        renderTasks(tasks);
     }
 
     // pass in tasks and call render function for tasks
@@ -44,17 +45,36 @@ function renderTaskViewHeadline(category) {
 }
 
 function getAllTasks() {
-    return toDoList.retrieveFromLocalStorage();
+    let projectList = toDoList.retrieveFromLocalStorage();
 
-    // TO DO get allTasks that are not completed
+    projectList.forEach(project => {
+       project.tasks = project.tasks.filter(task => !task.completed);
+    });
+
+    projectList = projectList.filter(project => project.tasks.length > 0);
+
+    return projectList;
 }
+
+
+function getCompletedTasks() {
+    let projectList = toDoList.retrieveFromLocalStorage();
+
+    projectList.forEach(project => {
+       project.tasks = project.tasks.filter(task => task.completed);
+    });
+
+    projectList = projectList.filter(project => project.tasks.length > 0);
+
+    return projectList;
+}
+
 
 function renderTasks(projectsList) {
     const containerContent = document.querySelector("#container-content-overview");
     containerContent.innerHTML = "";
     
     projectsList.forEach(project => {
-        // render headline for project
         if (project.tasks.length > 0) {
             let projectContainer = document.createElement("div");
             projectContainer.classList.add("project-tasks-component");
@@ -81,9 +101,13 @@ function renderTasks(projectsList) {
                 inputCheckbox.id = `task-complete-${index}`;
                 inputCheckbox.dataset.taskname = task.name;
                 inputCheckbox.dataset.projectname = project.name;
+                if (currentCategory === "tasks-completed") {
+                    inputCheckbox.checked = true;
+                }
                 inputCheckbox.addEventListener("change", () => {
                     let checked = inputCheckbox.checked;
                     toDoList.toggleTaskComplete(checked, project.name, task.name);
+                    renderTaskView(currentCategory);
                 });
     
                 let title = document.createElement("p");
@@ -99,7 +123,7 @@ function renderTasks(projectsList) {
                 editButton.dataset.taskname = task.name;
                 editButton.dataset.projectname = project.name;
                 editButton.addEventListener("click", function() {
-                    addEditTaskEvent(editButton, task, index);
+                    addEditTaskEvent(editButton, task);
                 })
     
                 let deleteButton = document.createElement("button");
@@ -135,8 +159,7 @@ function renderTasks(projectsList) {
     })
 }
 
-function addEditTaskEvent(editButton, task, taskIndex) {
-    // add eventlistener
+function addEditTaskEvent(editButton, task) {
     const editTaskForm = document.querySelector("#dialog-edit-task");
     const inputName = document.querySelector("#name-edit-task");
     const inputDescription = document.querySelector("#description-edit-task");
@@ -179,7 +202,7 @@ function addEditTaskEvent(editButton, task, taskIndex) {
         let taskName = editButton.dataset.taskname;
 
         toDoList.deleteTask(projectName, taskName);
-        
+
         renderTaskView(currentCategory);
     });
 }

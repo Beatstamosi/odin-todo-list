@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     allTaskButton.addEventListener("click", () => {
         renderTaskView(allTaskButton.id);
     })
+
+    const completedTaskButton = document.querySelector("#tasks-completed");
+    completedTaskButton.addEventListener("click", () => {
+        renderTaskView(completedTaskButton.id);
+    })
+
 });
 
 
