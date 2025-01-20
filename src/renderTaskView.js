@@ -104,6 +104,7 @@ function renderProjectViewInfo(projectName) {
         nameTask.value = "";
         descriptionTask.value = "";
         dueDateTask.value = "";
+        dueDateTask.setAttribute("max", `${project.dueDate}`);
         option.value = projectName;
         option.textContent = projectName;
         selectField.appendChild(option);
