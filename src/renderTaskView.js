@@ -26,6 +26,7 @@ export default function renderTaskView(category, projectName = undefined) {
 
 function renderTaskViewHeadline(category) {
     const contentHeadline = document.querySelector("#content-headline");
+    contentHeadline.classList.remove("project");
 
     let headline;
 
@@ -48,10 +49,10 @@ function renderProjectViewInfo(projectName) {
     let projectIndex = toDoList.getProjectIndex(projectName);
 
     let project = projectList[projectIndex];
-    console.log(project);
 
     // render headline
     const contentHeadline = document.querySelector("#content-headline");
+    contentHeadline.classList.add("project");
     contentHeadline.textContent = project.name;
 
     // render description
@@ -63,6 +64,11 @@ function renderProjectViewInfo(projectName) {
         projectInfoContainer.id = ("project-info");
         contentHeadline.insertAdjacentElement("afterend", projectInfoContainer);
     }
+
+    const dueDateInfo = document.createElement("p");
+    dueDateInfo.id = "project-due-date-task-view";
+    dueDateInfo.textContent = `Due date: ${project.dueDate}`;
+    projectInfoContainer.appendChild(dueDateInfo);
 
     const newParagraph = document.createElement("p");
     newParagraph.id = "project-description-tasks";
@@ -196,7 +202,7 @@ function renderTasks(projectsList) {
                 let projectHeader = document.createElement("h2");
                 projectHeader.textContent = project.name;
                 projectContainer.appendChild(projectHeader);
-                
+
                 // clear project specific content
                 let projectInfoContainer = document.querySelector("#project-info");
                 if (projectInfoContainer) {

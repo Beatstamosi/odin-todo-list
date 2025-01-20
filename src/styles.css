@@ -106,6 +106,10 @@ hr {
     color: var(--mutedNavy);
 }
 
+#content-headline.project {
+    color: var(--lightTeal);
+}
+
 .add-btn:hover {
     filter: drop-shadow(0 0 10px rgba(22, 160, 133, 0.8)) 
           drop-shadow(0 0 15px rgba(22, 160, 133, 0.6)) 
@@ -332,4 +336,13 @@ input[type="checkbox"] {
 
 #project-info {
     border-bottom: 1px solid var(--softGray);
+}
+
+#project-due-date-task-view {
+    margin-left: 40px;
+    margin-bottom: 40px;
+    font-style: italic;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--mutedNavy);
 }
