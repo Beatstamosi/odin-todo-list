@@ -3,7 +3,7 @@ import assignProjectOptionsToTaskForm from "./projectOptions";
 import renderTaskView from "./renderTaskView";
 import { currentCategory } from "./renderTaskView";
 
-export default function setupButtonListeners() {
+export default function setupButtonListenersForms() {
     // pop up form to add task
     const dialogTask = document.querySelector("#dialog-add-task");
     const addTaskButton = document.querySelector("#add-new-task");
@@ -65,4 +65,36 @@ export default function setupButtonListeners() {
     submitProjectBtn.addEventListener("click", () => {
         toDoList.addProject(name.value, description.value, dueDate.value);
     });
+}
+
+
+export function setupButtonListenersTaskViewSidebar() {
+    const allTaskButton = document.querySelector("#tasks-all");
+    allTaskButton.addEventListener("click", () => {
+        renderTaskView(allTaskButton.id);
+    })
+
+    const completedTaskButton = document.querySelector("#tasks-completed");
+    completedTaskButton.addEventListener("click", () => {
+        renderTaskView(completedTaskButton.id);
+    })
+
+    const todayTaskButton = document.querySelector("#tasks-today");
+    todayTaskButton.addEventListener("click", () => {
+        renderTaskView(todayTaskButton.id);
+    })
+
+    const upcomingTaskButton = document.querySelector("#tasks-upcoming");
+   upcomingTaskButton.addEventListener("click", () => {
+        renderTaskView(upcomingTaskButton.id);
+    })
+
+    const projectsSidebar = Array.from(document.querySelectorAll(".container-project-category"));
+    projectsSidebar.forEach(project => {
+        project.addEventListener("click", () => {
+            let category = project.dataset.category;
+            let projectName = project.dataset.projectname;
+            renderTaskView(category, projectName);
+        })
+    })
 }
