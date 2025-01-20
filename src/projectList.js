@@ -7,7 +7,7 @@ export default function showProjectsSidebar() {
 
     let allProjects = toDoList.retrieveFromLocalStorage();
 
-    allProjects.forEach((project, index) => {
+    allProjects.forEach((project) => {
         let container = document.createElement("div");
         container.classList.add("container-project-category");
         projectsSidebar.appendChild(container);
@@ -20,7 +20,8 @@ export default function showProjectsSidebar() {
         text.textContent = project.name;
 
         container.append(img, text);
-        container.dataset.index = index;
+        container.dataset.projectname = project.name;
+        container.dataset.category = "project";
     })    
 }
 

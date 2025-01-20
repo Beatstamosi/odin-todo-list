@@ -30,6 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTaskView(upcomingTaskButton.id);
     })
 
+    const projectsSidebar = Array.from(document.querySelectorAll(".container-project-category"));
+    projectsSidebar.forEach(project => {
+        project.addEventListener("click", () => {
+            let category = project.dataset.category;
+            let projectName = project.dataset.projectname;
+            renderTaskView(category, projectName);
+        })
+    })
 });
 
 

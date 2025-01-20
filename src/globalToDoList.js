@@ -1,8 +1,6 @@
 import { Project } from "./createProject";
 import { Task } from "./createTask";
 import showProjectsSidebar from "./projectList";
-import renderTaskView from "./renderTaskView";
-import { currentCategory } from "./renderTaskView";
 
  export const toDoList = function() {
 
@@ -18,16 +16,17 @@ import { currentCategory } from "./renderTaskView";
     };
 
 
-    // TODO Check if function takes other parameter than projectName
     const deleteProject = function(projectName) {
         let projectIndex = getProjectIndex(projectName);
         allProjects.splice(projectIndex, 1);
         saveToLocalStorage();
     };
 
-    const addTaskToProject = function(nameTask, descriptionTask, dueDateTask, priority, index) {
+
+    const addTaskToProject = function(nameTask, descriptionTask, dueDateTask, priority, projectName) {
         let newTask = new Task(nameTask, descriptionTask, dueDateTask, priority);
-        allProjects[index].tasks.push(newTask);
+        let projectIndex = getProjectIndex(projectName);
+        allProjects[projectIndex].tasks.push(newTask);
         saveToLocalStorage();
 
         // TO DO check if task name already exists inside this project; show error and dont save
@@ -41,8 +40,6 @@ import { currentCategory } from "./renderTaskView";
         task.completed = checked;
 
         saveToLocalStorage();
-
-        // TO DO run screencontroller to update task list or remove task from view
     }
 
 
@@ -59,14 +56,12 @@ import { currentCategory } from "./renderTaskView";
         let projectIndex = getProjectIndex(projectName);
         let taskIndex = getTaskIndex(projectIndex, taskName);
 
-        // get task, update values
         let task = allProjects[projectIndex].tasks[taskIndex];
         task.name = newName;
         task.description = newDescription;
         task.dueDate = newDueDate;
         task.priority = newPriority;
 
-        // saveToLocalStorage
         saveToLocalStorage();
     }
 
@@ -120,6 +115,7 @@ import { currentCategory } from "./renderTaskView";
         addTaskToProject,
         toggleTaskComplete,
         deleteTask,
+        getProjectIndex,
         saveToLocalStorage,
         retrieveFromLocalStorage
     }

@@ -11,7 +11,7 @@ export default function assignProjectOptionsToTaskForm() {
     // for each project add option field to selectField
     list.forEach((project, index) => {
         let option = document.createElement("option");
-        option.value = index;
+        option.value = project.name;
         option.textContent = project.name;
 
         selectField.appendChild(option);

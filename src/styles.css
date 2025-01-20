@@ -212,6 +212,12 @@ input[type="date"]:invalid {
     padding: 10px;
 }
 
+#project-description-tasks {
+    padding-left: 40px;
+    font-size: 1.1em;
+    color: var(--mutedNavy);
+}
+
 .task-component {
     height: auto;
     display: grid;
@@ -297,4 +303,33 @@ input[type="checkbox"] {
     background-color: var(--red);
     color: var(--white);
     margin-right: auto;
+}
+
+.delete-project-btn, .add-task-project-btn {
+    color: var(--white);
+    font-size: 1em;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    margin-left: 40px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.delete-project-btn:hover, .add-task-project-btn:hover {
+    transform: scale(1.1);
+}
+
+.delete-project-btn {
+    background-color: var(--red);
+}
+
+.add-task-project-btn {
+    background-color: var(--green);
+}
+
+#project-info {
+    border-bottom: 1px solid var(--softGray);
 }

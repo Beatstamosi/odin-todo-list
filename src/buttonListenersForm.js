@@ -1,6 +1,7 @@
 import { toDoList } from "./globalToDoList";
 import assignProjectOptionsToTaskForm from "./projectOptions";
 import renderTaskView from "./renderTaskView";
+import { currentCategory } from "./renderTaskView";
 
 export default function setupButtonListeners() {
     // pop up form to add task
@@ -27,13 +28,13 @@ export default function setupButtonListeners() {
     const submitTaskButton = document.querySelector("#add-task");
     submitTaskButton.addEventListener("click", () => {
         let select = document.querySelector("#assign-to-project");
-        let projectIndex = select.options[select.selectedIndex].value;
+        let projectName = select.options[select.selectedIndex].value;
         let prioritySelect = document.querySelector("#priority-task");
         let priority = prioritySelect.options[prioritySelect.selectedIndex].value;
 
-        toDoList.addTaskToProject(nameTask.value, descriptionTask.value, dueDateTask.value, priority, projectIndex);
+        toDoList.addTaskToProject(nameTask.value, descriptionTask.value, dueDateTask.value, priority, projectName);
 
-        renderTaskView("tasks-all");
+        renderTaskView(currentCategory, projectName);
     });
 
 

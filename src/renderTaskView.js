@@ -1,27 +1,27 @@
 import { toDoList } from "./globalToDoList";
 
-let currentCategory;
+export let currentCategory;
 
-export default function renderTaskView(category) {
+export default function renderTaskView(category, projectName = undefined) {
     renderTaskViewHeadline(category);
 
     let tasks;
-    // depending on category call function to get tasks
+
     if (category === "tasks-all") {
         tasks = getAllTasks();
-        
     } else if (category === "tasks-today") {
         tasks = getTodayTasks();
     } else if (category === "tasks-upcoming") {
         tasks = getUpcomingTasks();
     } else if (category === "tasks-completed") {
         tasks = getCompletedTasks();
+    } else if (category === "project") {
+        tasks = getProjectTasks(projectName);
+        renderProjectViewInfo(projectName);
     }
 
     currentCategory = category;
     renderTasks(tasks);
-
-    // pass in tasks and call render function for tasks
 }
 
 function renderTaskViewHeadline(category) {
@@ -41,6 +41,71 @@ function renderTaskViewHeadline(category) {
 
     contentHeadline.textContent = headline;
 }
+
+function renderProjectViewInfo(projectName) {
+    // find project
+    let projectList = toDoList.retrieveFromLocalStorage();
+    let projectIndex = toDoList.getProjectIndex(projectName);
+
+    let project = projectList[projectIndex];
+    console.log(project);
+
+    // render headline
+    const contentHeadline = document.querySelector("#content-headline");
+    contentHeadline.textContent = project.name;
+
+    // render description
+    let projectInfoContainer = document.querySelector("#project-info");
+    if (projectInfoContainer) {
+        projectInfoContainer.innerHTML = "";
+    } else {
+        projectInfoContainer = document.createElement("div");
+        projectInfoContainer.id = ("project-info");
+        contentHeadline.insertAdjacentElement("afterend", projectInfoContainer);
+    }
+
+    const newParagraph = document.createElement("p");
+    newParagraph.id = "project-description-tasks";
+    newParagraph.textContent = project.description;
+    projectInfoContainer.appendChild(newParagraph);
+    
+
+    // deleteProject = function(projectName)
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-project-btn");
+    deleteButton.textContent = "Delete Project";
+    projectInfoContainer.appendChild(deleteButton);
+    deleteButton.addEventListener("click", () => {
+        toDoList.deleteProject(projectName);
+        window.location.reload(true);
+        // TO DO run eventlisteners
+    })
+
+
+    // add task
+    const addTaskButton = document.createElement("button");
+    addTaskButton.classList.add("add-task-project-btn");
+    addTaskButton.textContent = "Add New Task";
+    projectInfoContainer.appendChild(addTaskButton);
+    addTaskButton.addEventListener("click", () => {
+        const dialogTask = document.querySelector("#dialog-add-task");
+        let nameTask = document.querySelector("#name-task");
+        let descriptionTask = document.querySelector("#description-task");
+        let dueDateTask = document.querySelector("#due-date-task");
+        let selectField = document.querySelector("#assign-to-project");
+        let option = document.createElement("option");
+        selectField.innerHTML = "";
+        nameTask.value = "";
+        descriptionTask.value = "";
+        dueDateTask.value = "";
+        option.value = projectName;
+        option.textContent = projectName;
+        selectField.appendChild(option);
+        
+        dialogTask.showModal();
+    })
+}
+
 
 function getAllTasks() {
     let projectList = toDoList.retrieveFromLocalStorage();
@@ -106,10 +171,19 @@ function getCompletedTasks() {
     return projectList;
 }
 
+function getProjectTasks(projectName) {
+    let projectList = getAllTasks();
+
+    projectList = projectList.filter(project => project.name === projectName);
+
+    return projectList;
+}
+
 
 function renderTasks(projectsList) {
     const containerContent = document.querySelector("#container-content-overview");
     containerContent.innerHTML = "";
+
     
     projectsList.forEach(project => {
         if (project.tasks.length > 0) {
@@ -117,9 +191,18 @@ function renderTasks(projectsList) {
             projectContainer.classList.add("project-tasks-component");
             containerContent.appendChild(projectContainer);
 
-            let projectHeader = document.createElement("h2");
-            projectHeader.textContent = project.name;
-            projectContainer.appendChild(projectHeader);
+            
+            if (currentCategory != "project") {
+                let projectHeader = document.createElement("h2");
+                projectHeader.textContent = project.name;
+                projectContainer.appendChild(projectHeader);
+                
+                // clear project specific content
+                let projectInfoContainer = document.querySelector("#project-info");
+                if (projectInfoContainer) {
+                    projectInfoContainer.innerHTML = "";
+                }
+            }
 
             project.tasks.forEach((task, index) => {
     
@@ -146,7 +229,7 @@ function renderTasks(projectsList) {
                     toDoList.toggleTaskComplete(checked, project.name, task.name);
 
                     setTimeout(() => {
-                        renderTaskView(currentCategory);
+                        renderTaskView(currentCategory, project.name);
                     }, 200);
                 });
     
