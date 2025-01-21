@@ -46,9 +46,8 @@ function renderTaskViewHeadline(category) {
 function renderProjectViewInfo(projectName) {
     // find project
     let projectList = toDoList.retrieveFromLocalStorage();
-    let projectIndex = toDoList.getProjectIndex(projectName);
 
-    let project = projectList[projectIndex];
+    let project = projectList.find(project => project.name === projectName)
 
     // render headline
     const contentHeadline = document.querySelector("#content-headline");
@@ -74,9 +73,8 @@ function renderProjectViewInfo(projectName) {
     newParagraph.id = "project-description-tasks";
     newParagraph.textContent = project.description;
     projectInfoContainer.appendChild(newParagraph);
-    
 
-    // deleteProject = function(projectName)
+    // deleteProject
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-project-btn");
     deleteButton.textContent = "Delete Project";
@@ -84,7 +82,17 @@ function renderProjectViewInfo(projectName) {
     deleteButton.addEventListener("click", () => {
         toDoList.deleteProject(projectName);
         window.location.reload(true);
-        // TO DO run eventlisteners
+    })
+
+
+    // edit Project
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-project-btn");
+    editButton.textContent = "Edit Project"
+    projectInfoContainer.appendChild(editButton);
+    editButton.dataset.projectname = project.name;
+    editButton.addEventListener("click", () => {
+        editProject(project.name);
     })
 
 
@@ -202,6 +210,12 @@ function renderTasks(projectsList) {
             if (currentCategory != "project") {
                 let projectHeader = document.createElement("h2");
                 projectHeader.textContent = project.name;
+                // add eventlistener on click to load projectview
+                projectHeader.addEventListener("click", () => {
+                    renderTaskView("project", project.name);
+                });
+
+
                 projectContainer.appendChild(projectHeader);
 
                 // clear project specific content
@@ -266,7 +280,7 @@ function renderTasks(projectsList) {
 
                     toDoList.deleteTask(projectName, taskName);
 
-                    renderTaskView(currentCategory);
+                    renderTaskView(currentCategory, projectName);
                 })
                 
     
@@ -322,7 +336,7 @@ function addEditTaskEvent(editButton, task) {
 
         toDoList.editTask(projectName, taskName, newName, newDescription, newDueDate, newPriority);
 
-        renderTaskView(currentCategory);
+        renderTaskView(currentCategory, projectName);
 
     });
 
@@ -333,6 +347,39 @@ function addEditTaskEvent(editButton, task) {
 
         toDoList.deleteTask(projectName, taskName);
 
-        renderTaskView(currentCategory);
+        renderTaskView(currentCategory, projectName);
+    });
+}
+
+function editProject(projectName) {
+    const editTaskForm = document.querySelector("#dialog-edit-project");
+    const inputName = document.querySelector("#name-edit-project");
+    const inputDescription = document.querySelector("#description-edit-project");
+    const inputDueDate = document.querySelector("#due-date-edit-project");
+    const cancelBtn = document.querySelector("#cancel-edit-project-form");
+    const saveChangesBtn = document.querySelector("#save-edit-project-btn");
+    let project = toDoList.retrieveFromLocalStorage();
+    project = project.find(project => project.name = projectName);
+
+    editTaskForm.showModal();
+
+    inputName.value = project.name;
+    inputDescription.value = project.description;
+    inputDueDate.value = project.dueDate;
+
+    cancelBtn.addEventListener("click", () => {
+        editTaskForm.close();
+    })
+
+    saveChangesBtn.addEventListener("click", () => {
+        // send new values
+        let newName = inputName.value;
+        let newDescription = inputDescription.value;
+        let newDueDate = inputDueDate.value;
+
+        toDoList.editProject(projectName, newName, newDescription, newDueDate);
+
+        renderTaskView(currentCategory, projectName);
+
     });
 }

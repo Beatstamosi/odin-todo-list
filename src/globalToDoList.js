@@ -77,6 +77,17 @@ import showProjectsSidebar from "./projectList";
         saveToLocalStorage();
     }
 
+    const editProject = function(projectName, newName, newDescription, newDueDate) {
+        let projectIndex = getProjectIndex(projectName);
+
+        let project = allProjects[projectIndex];
+        project.name = newName;
+        project.description = newDescription;
+        project.dueDate = newDueDate;
+
+        saveToLocalStorage();
+    }
+
 
     function getProjectIndex(projectName) {
         const checkForName = (element) => element.name === projectName;
@@ -124,10 +135,10 @@ import showProjectsSidebar from "./projectList";
         addProject,
         deleteProject,
         editTask,
+        editProject,
         addTaskToProject,
         toggleTaskComplete,
         deleteTask,
-        getProjectIndex,
         saveToLocalStorage,
         retrieveFromLocalStorage
     }

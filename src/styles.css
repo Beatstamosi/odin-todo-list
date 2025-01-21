@@ -216,6 +216,10 @@ input[type="date"]:invalid {
     padding: 10px;
 }
 
+.project-tasks-component h2:hover {
+    cursor: pointer;
+}
+
 #project-description-tasks {
     padding-left: 40px;
     font-size: 1.1em;
@@ -309,7 +313,7 @@ input[type="checkbox"] {
     margin-right: auto;
 }
 
-.delete-project-btn, .add-task-project-btn {
+.delete-project-btn, .add-task-project-btn, .edit-project-btn {
     color: var(--white);
     font-size: 1em;
     padding: 5px 10px;
@@ -322,8 +326,13 @@ input[type="checkbox"] {
     margin-bottom: 30px;
 }
 
-.delete-project-btn:hover, .add-task-project-btn:hover {
+
+.delete-project-btn:hover, .add-task-project-btn:hover, .edit-project-btn:hover {
     transform: scale(1.1);
+}
+
+.edit-project-btn {
+    background-color: var(--softBlue);
 }
 
 .delete-project-btn {

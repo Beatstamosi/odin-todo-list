@@ -150,6 +150,31 @@
             </form>
         </dialog>
 
+        <!-- Form Edit Project -->
+        <dialog id="dialog-edit-project">
+            <div class="headline-form">
+                <h2>Edit Project</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-edit-project">Name: </label>
+                    <input type="text" id="name-edit-project" autofocus required>
+                </div>
+                <div class="container-input-form">
+                    <label for="description-edit-project">Description: </label>
+                    <textarea name="description-edit-project" id="description-edit-project" rows="5" cols="100"></textarea>
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-edit-project">Due Date: </label>
+                    <input type="date" id="due-date-edit-project" required>
+                </div>
+                <div class="container-form-buttons">
+                    <button class="cancel-form" id="cancel-edit-project-form">Cancel</button>
+                    <button class="form-add-button" id="save-edit-project-btn" type="submit">Edit Project</button>
+                </div>
+            </form>
+        </dialog>
+
     </div>
 </body>
 </html>
