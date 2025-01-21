@@ -2,6 +2,7 @@ import { toDoList } from "./globalToDoList";
 
 export default function assignProjectOptionsToTaskForm() {
     const selectField = document.querySelector("#assign-to-project");
+    let initialProjectName;
 
     // get todolist
     let list = toDoList.retrieveFromLocalStorage();
@@ -17,13 +18,14 @@ export default function assignProjectOptionsToTaskForm() {
         // Set the first option to be selected by default
         if (index === 0) {
             option.selected = true;
-
-            // Ensure max date is set based on the first project after options are added
-            setMaxDateAttributeDependingOnProjectDueDate(selectField, list, project.name);
+            initialProjectName = project.name;
         }
 
         selectField.appendChild(option);
     });
+
+    // Ensure max date is set based on the first project after options are added
+    setMaxDateAttributeDependingOnProjectDueDate(selectField, list, initialProjectName);
 }
 
 
