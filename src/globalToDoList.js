@@ -8,11 +8,15 @@ import showProjectsSidebar from "./projectList";
     const allProjects = existingToDoList ? existingToDoList : [];
 
     const addProject = function(name, description, dueDate) {
+        let existingProject = allProjects.find(project => project.name === name);
+
+        if (existingProject) {
+            return
+        }
+
         allProjects.push(new Project(name, description, dueDate));
         saveToLocalStorage();
         showProjectsSidebar();
-
-        // TO DO check if project name already exists
     };
 
 
@@ -24,12 +28,20 @@ import showProjectsSidebar from "./projectList";
 
 
     const addTaskToProject = function(nameTask, descriptionTask, dueDateTask, priority, projectName) {
+        let existingProject = allProjects.find(project => project.name === projectName);
+
+        if (existingProject) {
+            let existingTask = existingProject.tasks.some(task => task.name === nameTask);
+
+            if (existingTask) {
+                return
+            }
+        }
+
         let newTask = new Task(nameTask, descriptionTask, dueDateTask, priority);
         let projectIndex = getProjectIndex(projectName);
         allProjects[projectIndex].tasks.push(newTask);
         saveToLocalStorage();
-
-        // TO DO check if task name already exists inside this project; show error and dont save
     };
 
     const toggleTaskComplete = function(checked, projectName, taskName) {

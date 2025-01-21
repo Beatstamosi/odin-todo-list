@@ -19,6 +19,7 @@ export default function setupButtonListenersForms() {
         dueDateTask.value = "";
         dialogTask.showModal();
     });
+    
 
     closeTaskFormButton.addEventListener("click", () => {
         dialogTask.close();
