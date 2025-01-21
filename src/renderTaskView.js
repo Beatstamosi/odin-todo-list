@@ -215,7 +215,6 @@ function renderTasks(projectsList) {
                     renderTaskView("project", project.name);
                 });
 
-
                 projectContainer.appendChild(projectHeader);
 
                 // clear project specific content
