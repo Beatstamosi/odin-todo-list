@@ -1,4 +1,5 @@
 import { toDoList } from "./globalToDoList";
+import getDate from "./getDate";
 
 export default function initializeList() {
     let currentList = toDoList.retrieveFromLocalStorage();
@@ -7,13 +8,7 @@ export default function initializeList() {
         const name = "General Work";
         const description = "This is a placeholder project for all your general tasks";
 
-        let dateToday = new Date();
-        dateToday.setDate(dateToday.getDate() + 14);
-        let day = ('0' + dateToday.getDate()).slice(-2);
-        let month = ('0' + dateToday.getMonth() + 1).slice(-2);
-        let year = dateToday.getFullYear();
-
-        let dueDate = `${year}-${month}-${day}`;
+        let dueDate = getDate(14);
 
         toDoList.addProject(name, description, dueDate);
 
@@ -24,14 +19,8 @@ export default function initializeList() {
 function initializeFirstTask(projectName) {
     let nameTask = "Get General Work done";
     let descriptionTask = "This is just a placeholder task to show you the functionality";
-    let dateToday = new Date();
-    dateToday.setDate(dateToday.getDate() + 14);
-    let day = ('0' + dateToday.getDate()).slice(-2);
-    let month = ('0' + dateToday.getMonth() + 1).slice(-2);
-    let year = dateToday.getFullYear();
 
-    let dueDateTask = `${year}-${month}-${day}`;
-
+    let dueDateTask = getDate(7);
 
     let priority = "low";
 

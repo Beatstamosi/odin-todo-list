@@ -1,4 +1,5 @@
 import { toDoList } from "./globalToDoList";
+import getDate from "./getDate";
 
 export let currentCategory;
 
@@ -137,12 +138,7 @@ function getAllTasks() {
 function getTodayTasks() {
     let projectList = getAllTasks();
 
-    let dateToday = new Date();
-    let day = ('0' + dateToday.getDate()).slice(-2);
-    let month = ('0' + dateToday.getMonth() + 1).slice(-2);
-    let year = dateToday.getFullYear();
-
-    let currentDate = `${year}-${month}-${day}`;
+    let currentDate = getDate();
 
     projectList.forEach(project => {
        project.tasks = project.tasks.filter(task => task.dueDate === currentDate);
@@ -156,13 +152,7 @@ function getTodayTasks() {
 function getUpcomingTasks() {
     let projectList = getAllTasks();
 
-    let dateToday = new Date();
-    dateToday.setDate(dateToday.getDate() + 7);
-    let day = ('0' + dateToday.getDate()).slice(-2);
-    let month = ('0' + dateToday.getMonth() + 1).slice(-2);
-    let year = dateToday.getFullYear();
-
-    let dateOneWeek = `${year}-${month}-${day}`;
+    let dateOneWeek = getDate(7);
 
     projectList.forEach(project => {
        project.tasks = project.tasks.filter(task => task.dueDate < dateOneWeek);
