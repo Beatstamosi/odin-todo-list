@@ -1,6 +1,7 @@
 import { Project } from "./createProject";
 import { Task } from "./createTask";
 import showProjectsSidebar from "./projectList";
+import { setupButtonListenersTaskViewSidebar } from "./buttonListeners";
 
  export const toDoList = function() {
 
@@ -16,7 +17,6 @@ import showProjectsSidebar from "./projectList";
 
         allProjects.push(new Project(name, description, dueDate));
         saveToLocalStorage();
-        showProjectsSidebar();
     };
 
 

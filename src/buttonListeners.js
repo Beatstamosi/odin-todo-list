@@ -2,6 +2,7 @@ import { toDoList } from "./globalToDoList";
 import assignProjectOptionsToTaskForm from "./projectOptions";
 import renderTaskView from "./renderTaskView";
 import { currentCategory } from "./renderTaskView";
+import showProjectsSidebar from "./projectList";
 
 export default function setupButtonListenersForms() {
     // pop up form to add task
@@ -65,6 +66,8 @@ export default function setupButtonListenersForms() {
 
     submitProjectBtn.addEventListener("click", () => {
         toDoList.addProject(name.value, description.value, dueDate.value);
+        showProjectsSidebar();
+        setupButtonListenersTaskViewSidebar();
     });
 }
 
