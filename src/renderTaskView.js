@@ -189,6 +189,13 @@ function renderTasks(projectsList) {
     const containerContent = document.querySelector("#container-content-overview");
     containerContent.innerHTML = "";
 
+    // clear project specific content
+    if (currentCategory != "project") {
+        let projectInfoContainer = document.querySelector("#project-info");
+        if (projectInfoContainer) {
+            projectInfoContainer.innerHTML = "";
+        }
+    }
     
     projectsList.forEach(project => {
         if (project.tasks.length > 0) {
@@ -206,12 +213,6 @@ function renderTasks(projectsList) {
                 });
 
                 projectContainer.appendChild(projectHeader);
-
-                // clear project specific content
-                let projectInfoContainer = document.querySelector("#project-info");
-                if (projectInfoContainer) {
-                    projectInfoContainer.innerHTML = "";
-                }
             }
 
             project.tasks.forEach((task, index) => {
