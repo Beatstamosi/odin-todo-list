@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <div id="container">
+        <!-- SideBar -->
+        <div id="sidebar">
+            <div id="user">
+                <img src="7526a964024980008173.svg" alt="">
+                <span>Madame Pomfrites</span>
+            </div>
+
+            <div id="tasks-sidebar">
+                <div class="category-headline">
+                    <h2>Tasks</h2>
+                    <img class="add-btn" id="add-new-task" src="2fba99a61613439e911a.svg" alt="">
+                </div>
+                <hr>
+                <div class="container-task-category" id="tasks-all">
+                    <img src="3d147c44d5b7109e2333.svg" class="icon-tasks" alt="">
+                    <span>All</span>
+                </div>
+                <div class="container-task-category" id="tasks-today">
+                    <img src="92cf3ef76937125ad40a.svg" class="icon-tasks" alt="">
+                    <span>Today</span>
+                </div>
+                <div class="container-task-category" id="tasks-upcoming">
+                    <img src="15aec66e583f64e0b9bb.svg" class="icon-tasks" alt="">
+                    <span>Upcoming</span>
+                </div>
+                <div class="container-task-category" id="tasks-completed">
+                    <img src="0aaab1b83e0c27fadc6e.svg" class="icon-tasks" alt="">
+                    <span>Completed</span>
+                </div>
+            </div>
+
+            <div id="projects-sidebar">
+                <div class="category-headline">
+                    <h2>Projects</h2>
+                    <img class="add-btn" id="add-new-project" src="2fba99a61613439e911a.svg" alt="">
+                </div>
+                <hr>
+                <div id="project-list-sidebar-container"></div>
+            </div>
+        </div>
+    
+        <!-- Main Area -->
+        <div id="content">
+            <h2 id="content-headline"></h2>
+            <div id="container-content-overview"></div>
+        </div>
+
+        <!-- Form Add Task -->
+        <dialog id="dialog-add-task">
+            <div class="headline-form">
+                <h2>Add Task</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-task">Name: </label>
+                    <input type="text" id="name-task" autofocus required>
+                </div>
+                <div class="container-input-form">
+                    <label for="description-task">Description: </label>
+                    <textarea name="description-task" id="description-task" rows="5" cols="100"></textarea>
+                </div>
+                <div class="container-input-form">
+                    <label for="assign-to-project">Assign to Project: </label>
+                    <select name="assign-to-project" id="assign-to-project"></select>
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-task">Due Date: </label>
+                    <input type="date" id="due-date-task" required>
+                </div>
+                <div class="container-input-form">
+                    <label for="priority-task">Priority: </label>
+                    <select name="priority-task" id="priority-task">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="container-form-buttons">
+                    <button class="cancel-form" id="cancel-task-form">Cancel</button>
+                    <button class="form-add-button" id="add-task" type="submit">Add Task</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Form Add Project -->
+        <dialog id="dialog-add-project">
+            <div class="headline-form">
+                <h2>Add Project</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-project">Name: </label>
+                    <input type="text" id="name-project" autofocus required>
+                </div>
+                <div class="container-input-form">
+                    <label for="description-project">Description: </label>
+                    <textarea name="description-project" id="description-project" rows="5" cols="100"></textarea>
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-project">Due Date: </label>
+                    <input type="date" id="due-date-project" required>
+                </div>
+                <div class="container-form-buttons">
+                    <button class="cancel-form" id="cancel-project-form">Cancel</button>
+                    <button class="form-add-button" id="add-project" type="submit">Add Project</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Form Edit Task -->
+        <dialog id="dialog-edit-task">
+            <div class="headline-form">
+                <h2>Edit Task</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-edit-task">Name: </label>
+                    <input type="text" id="name-edit-task" autofocus required>
+                </div>
+                <div class="container-input-form">
+                    <label for="description-edit-task">Description: </label>
+                    <textarea name="description-edit-task" id="description-edit-task" rows="5" cols="100"></textarea>
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-edit-task">Due Date: </label>
+                    <input type="date" id="due-date-edit-task" required>
+                </div>
+                <div class="container-input-form">
+                    <label for="priority-edit-task">Priority: </label>
+                    <select name="priority-edit-task" id="priority-edit-task">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="container-form-buttons">
+                    <button class="delete-task-form" id="delete-task-form-btn">Delete Task</button>
+                    <button class="cancel-form" id="cancel-edit-task-form">Cancel</button>
+                    <button class="form-add-button" id="save-edit-task-btn" type="submit">Save Changes</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Form Edit Project -->
+        <dialog id="dialog-edit-project">
+            <div class="headline-form">
+                <h2>Edit Project</h2>
+            </div>
+            <form method="dialog">
+                <div class="container-input-form">
+                    <label for="name-edit-project">Name: </label>
+                    <input type="text" id="name-edit-project" autofocus required>
+                </div>
+                <div class="container-input-form">
+                    <label for="description-edit-project">Description: </label>
+                    <textarea name="description-edit-project" id="description-edit-project" rows="5" cols="100"></textarea>
+                </div>
+                <div class="container-input-form">
+                    <label for="due-date-edit-project">Due Date: </label>
+                    <input type="date" id="due-date-edit-project" required>
+                </div>
+                <div class="container-form-buttons">
+                    <button class="cancel-form" id="cancel-edit-project-form">Cancel</button>
+                    <button class="form-add-button" id="save-edit-project-btn" type="submit">Edit Project</button>
+                </div>
+            </form>
+        </dialog>
+
+    </div>
+</body>
+</html>
