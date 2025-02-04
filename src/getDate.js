@@ -6,7 +6,7 @@ export default function getDate(increase = 0) {
   }
 
   let day = ("0" + dateToday.getDate()).slice(-2);
-  let month = ("0" + dateToday.getMonth() + 1).slice(-2);
+  let month = ("0" + (dateToday.getMonth() + 1)).slice(-2);
   let year = dateToday.getFullYear();
 
   return `${year}-${month}-${day}`;
